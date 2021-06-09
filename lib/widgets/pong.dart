@@ -36,6 +36,7 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
   int score = 0;
 
   GlobalKey _keyAi = GlobalKey();
+  RenderBox _aiRenderBox;
 
   @override
   void initState() {
@@ -207,11 +208,13 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
   }
 
   getCurrentAiPosition() {
-    if (_keyAi.currentContext == null) {
+    if (_aiRenderBox == null) {
+      if (_keyAi.currentContext != null) {
+        _aiRenderBox = _keyAi.currentContext.findRenderObject();
+      }
       return 0;
     }
-    RenderBox box = _keyAi.currentContext.findRenderObject();
-    Offset position = box.localToGlobal(Offset.zero);
+    Offset position = _aiRenderBox.localToGlobal(Offset.zero);
     return position.dx;
   }
 }
