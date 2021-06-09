@@ -95,7 +95,7 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
           ),
           AnimatedPositioned(
             key: _keyAi,
-            duration: Duration(seconds: 1),
+            duration: Duration(milliseconds: speedAi),
             top: 0,
             left: batAIPosition,
             child: Bat(batWidth, batHeight),
@@ -173,7 +173,7 @@ class _PongState extends State<Pong> with SingleTickerProviderStateMixin {
     if (dir == Direction.left) {
       return getStartingBatPosition(posX, posY, 0);
     } else {
-      return getStartingBatPosition(posX, posY, width);
+      return getStartingBatPosition(posX, posY, width - batWidth);
     }
   }
 
